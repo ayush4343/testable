@@ -23,7 +23,7 @@ jobs:
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
-      RAILS_ENV: development
+      RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
@@ -56,5 +56,4 @@ jobs:
         run: bundle exec brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
-      - name: start the server
-        run: bundle exec rails s
+      
