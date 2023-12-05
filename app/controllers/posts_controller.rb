@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     # frozen_string_literal: true
-    before_action :set_vehicle, only: %i[show update destroy mark_defective]
+    before_action :set_post, only: %i[show update destroy]
   
     # GET /vehicles
     def index
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   
     # PATCH/PUT /vehicles/1
     def update
-      if @post.update(vehicle_params)
+      if @post.update(post_params)
         @post.update(group_id: nil) if @vehicle.group_id == 0
         render json: @post
       else
@@ -48,13 +48,13 @@ class PostsController < ApplicationController
     end
   
     # Only allow a trusted parameter "white list" through.
-    def vehicle_params
+    def post_params
       params.require(:post).permit(
         :name,
         :email,
         :address,
       )
     end
-  end
+  
   
 end
