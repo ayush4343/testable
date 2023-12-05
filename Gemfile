@@ -52,6 +52,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "pg"
   gem 'bundler-audit', require: false
+  gem 'brakeman'
 end
 
 group :development do
