@@ -52,8 +52,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "pg"
   gem 'bundler-audit', require: false
-  gem 'brakeman', require: false
-
+  gem 'brakeman'
+  gem 'rubocop', require: false
 end
 
 group :development do
