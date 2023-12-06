@@ -30,7 +30,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /vehicles/1
   def update
     if @post.update(post_params)
-      @post.update(group_id: nil) if @vehicle.group_id.zero?
       render json: @post
     else
       render json: @post.errors, status: :unprocessable_entity
