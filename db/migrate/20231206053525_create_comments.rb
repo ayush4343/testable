@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-# Top-level documentation comment for CreateComments migration
 
+# Top-level documentation comment for CreateComments migration
 
 class CreateComments < ActiveRecord::Migration[7.0]
   def change
