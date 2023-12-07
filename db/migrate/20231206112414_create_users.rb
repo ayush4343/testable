@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-# this is user migration table
+# Top-level documentation comment for CreateUsers migration
 
 class CreateUsers < ActiveRecord::Migration[7.0]
   def change
