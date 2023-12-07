@@ -1,4 +1,5 @@
 # Migration to create users tableclass UserController < ApplicationController
+class UserController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
   # GET /vehicles
