@@ -55,7 +55,7 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pg'
-  gem 'rubocop', require: false
+  gem 'rubocop', require: true
   gem 'rubocop-rails'
   gem 'ruby_audit'
 end
