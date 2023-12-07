@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+# this is use controller with all method
+
 class UserController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
