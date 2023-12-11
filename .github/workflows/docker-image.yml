@@ -22,10 +22,10 @@ jobs:
         username: ayushjain094
         password: dckr_pat_Wej_fnn7IJzuKRCnFEuE9dSit-Q
 
-    - name: Build Docker image
+   - name: Build Docker image
       run: |
         docker build -t ayushjain094/testable:latest .
       
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ayushjain094/testable:latest:latest
+        docker push ayushjain094/testable:latest
