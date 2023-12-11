@@ -18,7 +18,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ayushjain094
-          password: dckr_pat_Wej_fnn7IJzuKRCnFEuE9dSit-Q # Use GitHub secrets instead of hardcoding sensitive information
+          password: dckr_pat_Wej_fnn7IJzuKRCnFEuE9dSit-Q
 
       - name: Build Docker image
         run: |
