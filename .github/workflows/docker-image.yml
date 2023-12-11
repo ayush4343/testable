@@ -22,7 +22,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build -t ayushjain094/testable:my-tag -f /home/task/testable/Dockerfile /home/task/testable
+          docker buildx build -t ayushjain094/testable:my-tag -f Dockerfile .
         
 
       - name: Push Docker image to Docker Hub
