@@ -24,8 +24,8 @@ jobs:
 
    - name: Build Docker image
       run: |
-        docker build -t ayushjain094/testable:latest .
+        docker build -t ayushjain094/testable:test .
       
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ayushjain094/testable:latest
+        docker push ayushjain094/testable:test
