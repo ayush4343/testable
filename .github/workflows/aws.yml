@@ -35,7 +35,7 @@ env:
   ECR_REPOSITORY: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo           # set this to your Amazon ECR repository name
   ECS_SERVICE: arn:aws:ecs:ap-south-1:585964338321:service/demo/demoservice                 # set this to your Amazon ECS service name
   ECS_CLUSTER: arn:aws:ecs:ap-south-1:585964338321:cluster/demo                # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1.json # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1,  #set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo           # set this to the name of the container in the
                                                # section of your task definition
@@ -83,14 +83,14 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1.json
-        container-name: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo
+        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1
+        container-name: demotask
         image: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1.json
+        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:revision1
         service: arn:aws:ecs:ap-south-1:585964338321:service/demo/demoservice
         cluster: arn:aws:ecs:ap-south-1:585964338321:cluster/demo
         wait-for-service-stability: true
