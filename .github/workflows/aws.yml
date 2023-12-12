@@ -77,7 +77,7 @@ jobs:
         # be deployed to ECS.
         docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG .
         docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG
-        echo "585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG" >> $GITHUB_OUTPUT
+        echo "image=585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG" >> $GITHUB_OUTPUT
         
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
