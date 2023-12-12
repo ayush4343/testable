@@ -66,18 +66,19 @@ jobs:
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
-      env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          DEP_TAG: 'latest'  # Replace 'latest' with your desired tag or use a proper variable here
+      # env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     DEP_TAG: 'latest'  # Replace 'latest' with your desired tag or use a proper variable here
 
       run: |
+       DEP_TAG=$(date +%s)
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
         docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG .
         docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG
-        echo "585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo" >> $GITHUB_OUTPUT
-
+        echo "585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG" >> $GITHUB_OUTPUT
+        
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
