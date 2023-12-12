@@ -37,8 +37,8 @@ env:
   ECS_CLUSTER: arn:aws:ecs:ap-south-1:585964338321:cluster/demo                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:1 # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: demo           # set this to the name of the container in the
-                                               # containerDefinitions section of your task definition
+  CONTAINER_NAME: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo           # set this to the name of the container in the
+                                               # section of your task definition
 
 permissions:
   contents: read
@@ -73,22 +73,22 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo .
+        docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo 
+        echo "585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo" >> $GITHUB_OUTPUT
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.CONTAINER_NAME }}
-        image: ${{ steps.build-image.outputs.image }}
+        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:1
+        container-name: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo
+        image: 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.ECS_SERVICE }}
-        cluster: ${{ env.ECS_CLUSTER }}
+        task-definition: arn:aws:ecs:ap-south-1:585964338321:task-definition/demotask:1
+        service: arn:aws:ecs:ap-south-1:585964338321:service/demo/demoservice
+        cluster: arn:aws:ecs:ap-south-1:585964338321:cluster/demo
         wait-for-service-stability: true
