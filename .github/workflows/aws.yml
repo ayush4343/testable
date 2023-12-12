@@ -66,15 +66,12 @@ jobs:
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
-      # env:
-      #   ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #   IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo .
-        docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo 
+        docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG .
+        docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG
         echo "585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo" >> $GITHUB_OUTPUT
 
     - name: Fill in the new image ID in the Amazon ECS task definition
