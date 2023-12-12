@@ -52,24 +52,34 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
+    - name: Login to Docker Registry
+      uses: docker/login-action@v1
+        with:
+          registry: https://index.docker.io/v1/
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+     - name: Login to Amazon ECR
+        id: login-ecr
+          uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+    # - name: Build, tag, and push image to Amazon ECR
+    #   id: build-image
       # env:
       #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       #     DEP_TAG: 'latest'  # Replace 'latest' with your desired tag or use a proper variable here
 
-      run: |
-       DEP_TAG=$(date +%s)
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG .
-        docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG
-        echo "image=585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG" >> $GITHUB_OUTPUT
+      # run: |
+      #  DEP_TAG=$(date +%s)
+      #   # Build a docker container and
+      #   # push it to ECR so that it can
+      #   # be deployed to ECS.
+      #   docker build -t 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG .
+      #   docker push 585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG
+      #   echo "image=585964338321.dkr.ecr.ap-south-1.amazonaws.com/demo:$DEP_TAG" >> $GITHUB_OUTPUT
         
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
